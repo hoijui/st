@@ -1,5 +1,9 @@
 # st version
-VERSION = 0.8.5
+# NOTE .git is a dir in the main repo, but a file in a submodule
+VERSION := $(shell command -v git >/dev/null 2>&1 && \
+	[ -e .git ] && \
+	git describe --tags --always --dirty --broken \
+	|| echo "UNKNOWN_VERSION")
 
 # Customize below to fit your system
 
